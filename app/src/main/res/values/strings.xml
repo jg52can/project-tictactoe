@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TicTacToeDemo</string>
+    <string name="play_again">Play Again ??</string>
+</resources>
