@@ -113,7 +113,63 @@ public class playWithFriend extends AppCompatActivity {
         checkWin();
     }
 
+    void checkWin(){
+        int winner=0;
+        if(Player1.contains(1) && Player1.contains(2) && Player1.contains(3))
+            winner=1;
+        else if(Player1.contains(4) && Player1.contains(5) && Player1.contains(6))
+            winner=1;
+        else if(Player1.contains(7) && Player1.contains(8) && Player1.contains(9))
+            winner=1;
+        else if(Player1.contains(1) && Player1.contains(4) && Player1.contains(7))
+            winner=1;
+        else if(Player1.contains(2) && Player1.contains(5) && Player1.contains(8))
+            winner=1;
+        else if(Player1.contains(3) && Player1.contains(6) && Player1.contains(9))
+            winner=1;
+        else if(Player1.contains(1) && Player1.contains(5) && Player1.contains(9))
+            winner=1;
+        else if(Player1.contains(3) && Player1.contains(5) && Player1.contains(7))
+            winner=1;
+        else if(Player2.contains(1) && Player2.contains(2) && Player2.contains(3))
+            winner=2;
+        else if(Player2.contains(4) && Player2.contains(5) && Player2.contains(6))
+            winner=2;
+        else if(Player2.contains(7) && Player2.contains(8) && Player2.contains(9))
+            winner=2;
+        else if(Player2.contains(1) && Player2.contains(4) && Player2.contains(7))
+            winner=2;
+        else if(Player2.contains(2) && Player2.contains(5) && Player2.contains(8))
+            winner=2;
+        else if(Player2.contains(3) && Player2.contains(6) && Player2.contains(9))
+            winner=2;
+        else if(Player2.contains(1) && Player2.contains(5) && Player2.contains(9))
+            winner=2;
+        else if(Player2.contains(3) && Player2.contains(5) && Player2.contains(7))
+            winner=2;
 
+
+        if(winner!=0){
+            if(winner==1){
+                Toast.makeText(this,"Player1 is the winner",Toast.LENGTH_LONG).show();
+                User user = new User();
+                user.win=user.win+1;
+                user.winvspc=user.winvspc+1;
+                reference.child(userID).child("win").setValue(user.win);
+                reference.child(userID).child("winvspc").setValue(user.winvspc);
+                startActivity(new Intent(playWithFriend.this,gameMainPage.class));
+                finish();
+            }
+            else if(winner==2){
+                Toast.makeText(this,"Player2 is the winner",Toast.LENGTH_LONG).show();
+                User user = new User();
+                user.lose=user.lose+1;
+                reference.child(userID).child("lose").setValue(user.lose);
+                startActivity(new Intent(playWithFriend.this,gameMainPage.class));
+                finish();
+            }
+        }
+    }
     void AutoPlay(){
 
         ArrayList<Integer> EmptyCells= new ArrayList<Integer>();
