@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                             setValue(onuser).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
+
                         }
                     });
 
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         guest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,guestStartPage.class));
+                startActivity(new Intent(MainActivity.this,login.class));
                 finish();
             }
         });
