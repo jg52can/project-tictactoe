@@ -57,7 +57,7 @@ public class playOnlineHost extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(playOnlineHost.this, playGame.class);
-                        //intent.putExtra("email",model.getEmail());
+                        intent.putExtra("email",model.getEmail());
                         startActivity(intent);
                     }
                 });
