@@ -102,15 +102,14 @@ public class login extends AppCompatActivity {
                 startActivity(new Intent(login.this,register.class));
                 finish();
             }
-        });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if(mAuth.getCurrentUser()!=null){
-            startActivity(new Intent(login.this, gameMainPage.class));
-            finish();
+        });@Override
+        protected void onStart() {
+            super.onStart();
+            if(mAuth.getCurrentUser()!=null){
+                startActivity(new Intent(login.this, gameMainPage.class));
+                finish();
+            }
         }
-    }
-}
+    };
+
+

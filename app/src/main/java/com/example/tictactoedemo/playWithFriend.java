@@ -37,6 +37,7 @@ public class playWithFriend extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("Users");
         userID = user.getUid();
 
+
         reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
