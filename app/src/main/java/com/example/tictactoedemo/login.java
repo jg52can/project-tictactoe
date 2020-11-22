@@ -32,49 +32,13 @@ public class login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     EditText userEmail, userPass;
     private ProgressBar progressBar;
-    FirebaseUser user;
-    String userID;
-    private DatabaseReference reference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mAuth = FirebaseAuth.getInstance();
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("Users");
-        userID = user.getUid();
-
-        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User profile = snapshot.getValue(User.class);
-                if(profile != null){
-                    User user = new User();
-                    user.status = true;
-                    reference.child(userID).child("status").setValue(user.status);
-                    String names = profile.getUsername();
-                    String emails = profile.getEmail();
-
-                    Online onuser = new Online(names,emails);
-                    FirebaseDatabase.getInstance().getReference("Online").
-                            child(FirebaseAuth.getInstance().getCurrentUser().getUid()).
-                            setValue(onuser).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(login.this, "Something went wrong. Restart the app.", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-
         login  = (Button) findViewById(R.id.btn_login);
         create_account  = (TextView) findViewById(R.id.txt_create_account);
         userEmail = (EditText)findViewById(R.id.editTextTextPersonName);
@@ -138,15 +102,14 @@ public class login extends AppCompatActivity {
                 startActivity(new Intent(login.this,register.class));
                 finish();
             }
-        });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if(mAuth.getCurrentUser()!=null){
-            startActivity(new Intent(login.this, gameMainPage.class));
-            finish();
+        });@Override
+        protected void onStart() {
+            super.onStart();
+            if(mAuth.getCurrentUser()!=null){
+                startActivity(new Intent(login.this, gameMainPage.class));
+                finish();
+            }
         }
-    }
-}
+    };
+
+

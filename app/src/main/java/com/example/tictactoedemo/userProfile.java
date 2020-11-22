@@ -42,7 +42,7 @@ public class userProfile extends AppCompatActivity {
         signout = (Button)findViewById(R.id.btnSignOut);
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View V) {
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(userProfile.this, MainActivity.class));
                 finish();

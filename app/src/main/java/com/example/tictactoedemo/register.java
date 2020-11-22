@@ -92,7 +92,7 @@ public class register extends AppCompatActivity {
                     String userId = user1.getUid();
                     User user = new User(email,fullname,username,userId);
                     FirebaseDatabase.getInstance().getReference("Users").
-                            child(FirebaseAuth.getInstance().getCurrentUser().getUid()).
+                            child(userId).
                             setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
