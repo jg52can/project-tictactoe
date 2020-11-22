@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,11 +30,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 public class playGame extends AppCompatActivity {
-    EditText etInviteEMail;
-    EditText etMyEmail;
+    TextView etInviteEMail;
+    TextView etMyEmail;
     Button buLogin;
-    String inviteEmail;
-    FirebaseUser user;
 
     //Firebase
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -44,18 +43,18 @@ public class playGame extends AppCompatActivity {
     // Write a message to the database
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
-    private DatabaseReference reference;
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
-        etInviteEMail=(EditText)findViewById(R.id.etInviteEmal);
-        etMyEmail=(EditText)findViewById(R.id.etMyEmail);
+        etInviteEMail=(TextView)findViewById(R.id.etInviteEmal);
+        etMyEmail=(TextView)findViewById(R.id.etMyEmail);
         buLogin=(Button)findViewById(R.id.buLogin);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        String receive = getIntent().getStringExtra("email");
+        etInviteEMail.setText(receive);
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             public static final String TAG = "Login";
@@ -122,6 +121,8 @@ public class playGame extends AppCompatActivity {
                     }
                 });
     }
+
+
 
     public void BuInvite(View view) {
         Log.d("Invate",etInviteEMail.getText().toString());
@@ -300,13 +301,15 @@ public class playGame extends AppCompatActivity {
         Log.d("Player:",String.valueOf(CellID));
 
         if (ActivePlayer==1){
-            buSelected.setBackgroundResource(R.drawable.x);
+            buSelected.setText("X");
+            buSelected.setBackgroundColor(Color.YELLOW);
             Player1.add(CellID);
 
 
         }
         else if (ActivePlayer==2){
-            buSelected.setBackgroundResource(R.drawable.o);
+            buSelected.setText("O");
+            buSelected.setBackgroundColor(Color.GRAY);
             Player2.add(CellID);
 
 
@@ -368,47 +371,16 @@ public class playGame extends AppCompatActivity {
             Winer=2 ;
         }
 
-        //diagonal 1
-        if (Player1.contains(1) && Player1.contains(5)  && Player1.contains(9))  {
-            Winer=1 ;
-        }
-        if (Player2.contains(1) && Player2.contains(5)  && Player2.contains(9))  {
-            Winer=2 ;
-        }
 
-        //diagonal 2
-        if (Player1.contains(3) && Player1.contains(5)  && Player1.contains(7))  {
-            Winer=1 ;
-        }
-        if (Player2.contains(3) && Player2.contains(5)  && Player2.contains(7))  {
-            Winer=2 ;
-        }
-
-
-
-        if ( Winer !=0){
+        if ( Winer !=-1){
             // We have winer
 
             if (Winer==1){
                 Toast.makeText(this,"Player 1 is winner",Toast.LENGTH_LONG).show();
-                User user = new User();
-                user.win=user.win+1;
-                user.winvsfriends=user.winvsfriends+1;
-                reference.child(uid).child("win").setValue(user.win);
-                reference.child(uid).child("winvsfriends").setValue(user.winvsfriends);
-                startActivity(new Intent(playGame.this,gameMainPage.class));
-                finish();
             }
 
             if (Winer==2){
                 Toast.makeText(this,"Player 2 is winner",Toast.LENGTH_LONG).show();
-                User user = new User();
-                user.win=user.win+1;
-                user.winvsfriends=user.winvsfriends+1;
-                reference.child(uid).child("win").setValue(user.win);
-                reference.child(uid).child("winvsfriends").setValue(user.winvsfriends);
-                startActivity(new Intent(playGame.this,gameMainPage.class));
-                finish();
             }
 
         }
