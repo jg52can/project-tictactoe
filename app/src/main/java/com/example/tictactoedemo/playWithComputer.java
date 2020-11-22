@@ -93,27 +93,7 @@ public class playWithComputer extends AppCompatActivity {
         }
         playGame(cellId,buSelected);
     }
-    boolean single=true;
-    int active_player=1;
-    ArrayList<Integer> Player1=new ArrayList<Integer>();
-    ArrayList<Integer> Player2=new ArrayList<Integer>();
-    void playGame(int cellId,Button button){
-        Log.d( "Player:",String.valueOf(cellId));
-        if(active_player==1){
-            button.setBackgroundResource(R.drawable.x);
-            Player1.add(cellId);
-            active_player=2;
-            if(single)
-                AutoPlay();
-        }
-        else if(active_player==2){
-            button.setBackgroundResource(R.drawable.o);
-            Player2.add(cellId);
-            active_player=1;
-        }
-        button.setEnabled(false);
-        checkWin();
-    }
+
 
     void checkWin(){
         int winner=0;
