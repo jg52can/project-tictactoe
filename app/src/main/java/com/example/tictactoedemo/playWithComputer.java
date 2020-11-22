@@ -161,6 +161,9 @@ public class playWithComputer extends AppCompatActivity {
                 EmptyCells.add(cellID);
             }
         }
+        for (int cellID=1; cellID<10;cellID++){
+            if (!( Player1.contains(cellID) || Player2.contains(cellID))){
+                EmptyCells.add(cellID);
 
 
     }
