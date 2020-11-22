@@ -162,56 +162,6 @@ public class playWithComputer extends AppCompatActivity {
             }
         }
 
-        Random r= new Random();
-        int  RandIndex=r.nextInt(EmptyCells.size()- 0)+ 0;
-        int CellID=EmptyCells.get(RandIndex);
 
-        Button buSelected;
-        switch (CellID){
-
-            case 1 :
-                buSelected=(Button) findViewById(R.id.button);
-                break;
-
-            case 2:
-                buSelected=(Button) findViewById(R.id.button2);
-                break;
-
-            case 3:
-                buSelected=(Button) findViewById(R.id.button3);
-                break;
-
-            case 4:
-                buSelected=(Button) findViewById(R.id.button4);
-                break;
-
-            case 5:
-                buSelected=(Button) findViewById(R.id.button5);
-                break;
-
-            case 6:
-                buSelected=(Button) findViewById(R.id.button6);
-                break;
-
-            case 7:
-                buSelected=(Button) findViewById(R.id.button7);
-                break;
-
-            case 8:
-                buSelected=(Button) findViewById(R.id.button8);
-                break;
-
-            case 9:
-                buSelected=(Button) findViewById(R.id.button9);
-                break;
-            default:
-                buSelected=(Button) findViewById(R.id.button);
-                break;
-
-        }
-        playGame(CellID, buSelected);
-    }
-    public void modeClick(View view) {
-        single=true;
     }
 }
