@@ -93,7 +93,27 @@ public class playWithComputer extends AppCompatActivity {
         }
         playGame(cellId,buSelected);
     }
-
+    boolean single=true;
+    int active_player=1;
+    ArrayList<Integer> Player1=new ArrayList<Integer>();
+    ArrayList<Integer> Player2=new ArrayList<Integer>();
+    void playGame(int cellId,Button button){
+        Log.d( "Player:",String.valueOf(cellId));
+        if(active_player==1){
+            button.setBackgroundResource(R.drawable.x);
+            Player1.add(cellId);
+            active_player=2;
+            if(single)
+                AutoPlay();
+        }
+        else if(active_player==2){
+            button.setBackgroundResource(R.drawable.o);
+            Player2.add(cellId);
+            active_player=1;
+        }
+        button.setEnabled(false);
+        checkWin();
+    }
 
     void checkWin(){
         int winner=0;
@@ -161,10 +181,57 @@ public class playWithComputer extends AppCompatActivity {
                 EmptyCells.add(cellID);
             }
         }
-        for (int cellID=1; cellID<10;cellID++){
-            if (!( Player1.contains(cellID) || Player2.contains(cellID))){
-                EmptyCells.add(cellID);
 
+        Random r= new Random();
+        int  RandIndex=r.nextInt(EmptyCells.size()- 0)+ 0;
+        int CellID=EmptyCells.get(RandIndex);
 
+        Button buSelected;
+        switch (CellID){
+
+            case 1 :
+                buSelected=(Button) findViewById(R.id.button);
+                break;
+
+            case 2:
+                buSelected=(Button) findViewById(R.id.button2);
+                break;
+
+            case 3:
+                buSelected=(Button) findViewById(R.id.button3);
+                break;
+
+            case 4:
+                buSelected=(Button) findViewById(R.id.button4);
+                break;
+
+            case 5:
+                buSelected=(Button) findViewById(R.id.button5);
+                break;
+
+            case 6:
+                buSelected=(Button) findViewById(R.id.button6);
+                break;
+
+            case 7:
+                buSelected=(Button) findViewById(R.id.button7);
+                break;
+
+            case 8:
+                buSelected=(Button) findViewById(R.id.button8);
+                break;
+
+            case 9:
+                buSelected=(Button) findViewById(R.id.button9);
+                break;
+            default:
+                buSelected=(Button) findViewById(R.id.button);
+                break;
+
+        }
+        playGame(CellID, buSelected);
+    }
+    public void modeClick(View view) {
+        single=true;
     }
 }
